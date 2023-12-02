@@ -16,4 +16,4 @@ with open("input.txt", "r") as data:
         trimmedNumber = int(f"{entry[0]}{entry[-1]}")
         solution += trimmedNumber
 
-    print("Solution 1: " ,solution)
+    print("Solution: " ,solution)
