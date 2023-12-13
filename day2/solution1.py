@@ -1,12 +1,10 @@
 import re
-from pprint import pprint
-
 
 #
 # Organize the data into dict.
 #   Cube hands will be organized as red,blue,green tuples
 # Find solution based on constraints
-# 
+#
 
 data = open("./input.txt", "r")
 game_id_search = re.compile(r"(?<=Game )\d+")
@@ -15,7 +13,8 @@ blue_amount = re.compile(r"\d+(?= blue)")
 green_amount = re.compile(r"\d+(?= green)")
 game_dict = dict()
 solution = int()
-cube_constraints = (12,13,14)
+cube_constraints = (12, 13, 14)
+
 
 def find_cubes(game_input):
     try:
@@ -30,7 +29,8 @@ def find_cubes(game_input):
         blue = int(blue_amount.search(game_input).group(0))
     except:
         blue = 0
-    return (red,green,blue)
+    return (red, green, blue)
+
 
 def find_solution(cube_input, constraints):
     constraints = constraints
@@ -44,17 +44,20 @@ def find_solution(cube_input, constraints):
             return False
     return True
 
+
 for game in data.readlines():
     # Capture game information
-    entry, games = game.split(':')
+    entry, games = game.split(":")
     game_list = games.split(";")
 
     # build dict info for game
     game_id = int(game_id_search.search(entry).group(0))
-    game_dict[game_id] = {'cube_grabs':list()}
+    game_dict[game_id] = {"cube_grabs": list()}
     for game in game_list:
-        game_dict[game_id]['cube_grabs'].append(find_cubes(game))
-        game_dict[game_id]['solution'] = find_solution(game_dict[game_id]['cube_grabs'], cube_constraints)
+        game_dict[game_id]["cube_grabs"].append(find_cubes(game))
+        game_dict[game_id]["solution"] = find_solution(
+            game_dict[game_id]["cube_grabs"], cube_constraints
+        )
 
 for game in game_dict:
     if game_dict[game]["solution"] == True:
