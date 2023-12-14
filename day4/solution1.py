@@ -4,10 +4,12 @@ import re
 # Global Variables
 #
 
+# input
+data = open("./input.txt", "r")
+cards_list = data.readlines()
 # regex
 card_id_search = re.compile(r"\d+")
 number_search = re.compile(r"\d+")
-
 # data model
 card_dict = {}
 
@@ -62,8 +64,6 @@ def find_points(matches: list):
 def main():
     """Main function to execute the script logic."""
 
-    data = open("./input.txt", "r")
-    cards_list = data.readlines()
     solution = 0
 
     # organize data into dict.
