@@ -59,6 +59,15 @@ def find_points(matches: list):
     return points
 
 
+def find_card_count(card_id, match_count, card_count):
+    count = 0
+    while count < match_count:
+        card_id += 1
+        count += 1
+        card_dict[card_id]["card_count"] += card_count
+    pass
+
+
 def main():
     """Main function to execute the script logic."""
 
@@ -78,6 +87,7 @@ def main():
         card_dict[card_id] = {
             "user_numbers": user_numbers_list,
             "scratch_numbers": scratch_numbers_list,
+            "card_count": 1,
         }
 
         card_dict[card_id]["number_matches"] = gather_matches(
@@ -85,9 +95,15 @@ def main():
         )
         card_dict[card_id]["points"] = find_points(card_dict[card_id]["number_matches"])
 
-    # Find solution
+    # gather card counts
     for card in card_dict:
-        solution += card_dict[card]["points"]
+        count = card_dict[card]["card_count"]
+        matches = len(card_dict[card]["number_matches"])
+        find_card_count(card, matches, count)
+
+    # find solution
+    for card in card_dict:
+        solution += card_dict[card]["card_count"]
 
     print("Solution: ", solution)
 
