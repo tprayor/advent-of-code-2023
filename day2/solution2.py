@@ -1,9 +1,11 @@
 import re
 
+
 #
 # Organize the data into dict.
 #   Cube hands will be organized as red,blue,green tuples
 # Find solution based on constraints
+# Determine cube solution power.
 #
 
 data = open("./input.txt", "r")
@@ -45,6 +47,16 @@ def find_solution(cube_input, constraints):
     return True
 
 
+def find_power(cube_input):
+    power = 1
+    max_cubes = [max(cubes) for cubes in zip(*cube_input)]
+    print("cube_input: ", cube_input)
+    print("max_cubes: ", max_cubes)
+    for cubes in max_cubes:
+        power *= cubes
+    return power
+
+
 for game in data.readlines():
     # Capture game information
     entry, games = game.split(":")
@@ -58,9 +70,9 @@ for game in data.readlines():
         game_dict[game_id]["solution"] = find_solution(
             game_dict[game_id]["cube_grabs"], cube_constraints
         )
+    game_dict[game_id]["power"] = find_power(game_dict[game_id]["cube_grabs"])
 
 for game in game_dict:
-    if game_dict[game]["solution"] == True:
-        solution += game
+    solution += game_dict[game]["power"]
 
 print("Solution: ", solution)

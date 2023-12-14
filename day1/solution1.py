@@ -1,4 +1,3 @@
-
 with open("input.txt", "r") as data:
     inputList = data.read().split("\n")
     outputList = []
@@ -11,9 +10,9 @@ with open("input.txt", "r") as data:
             if char.isdigit() == True:
                 formattedOuput += char
         outputList.append(formattedOuput)
-    
+
     for entry in outputList:
         trimmedNumber = int(f"{entry[0]}{entry[-1]}")
         solution += trimmedNumber
 
-    print("Solution: " ,solution)
+    print("Solution: ", solution)
